@@ -135,6 +135,7 @@ This section controls how users are managed (how they're added to New Relic and 
 
 * Choosing the SCIM option ("Manage by identity provider") or the SAML SSO option will require you to leave the migration wizard and configure things elsewhere in the New Relic UI and in your identity provider, followed by finishing things in the wizard. 
 * Once you set how an authentication domain is managed (by identity provider or manually), that cannot be changed and adjusting that setting would require creating a new authentication domain and adding new user records. If it's possible you may soon change how your users are managed, that may be a reason to wait to migrate your user records. 
+* If you're planning on using SCIM, push your groups and users from your Identity Provider and configure access for your groups before the last step of the migration where you migrate user assets. This will ensure your user assets are migrated to the SCIM provisioned user records and that their groups have access setup. 
 
 Here's more detail about the two authentication domain sections:
 
@@ -144,7 +145,7 @@ For how users are added and managed, you can select **Manually** or **Identity p
 
 If you choose **Identity provider**, you must follow the [steps for automated user management](/docs/accounts/accounts/automated-user-management/automated-user-provisioning-single-sign#how-to), but skip steps related to creating groups, which you'll do later in this process. Once you complete the automated user management steps, return to the migration wizard and these docs. 
 
-Once you complete this step, we highly recommend completing the user migration process as quickly as you can. After completing this step, and until you finish the wizard procedure, your users will have two user records associated with the same login (see [login screenshot from Step 1](#page1)) or else may be missing assets they expect to see (like dashboards).
+Once you provision your users, whether that be manually or through SCIM, we highly recommend completing the user migration process as quickly as you can. After completing this step, and until you finish the wizard procedure, your users will have two user records associated with the same login (see [login screenshot from Step 1](#page1)) or else may be missing assets they expect to see (like dashboards).
 
 Some tips for syncing your identity provider with New Relic and setting up group access:
 
@@ -216,7 +217,7 @@ There are two methods for adding and managing your New Relic users. Select the m
 This step is about setting what roles and what accounts your user groups have access to. **Your users' existing roles and permissions won't be retained.** This means that if you need to set up your users to have access to specific accounts or specific roles, then you'll likely want to configure group access at this stage. 
 
 <Callout variant="important">
-For SCIM provisioning users: If you're using SCIM to import users and groups from your identity provider, you won't be able to edit roles and permissions in New Relic. All user and group changes are handled from your identity provider service.
+For SCIM provisioning users: If you're using SCIM to import users and groups from your identity provider, you won't be able to edit groups or roles in New Relic. All user and group changes are handled from your identity provider service.
 </Callout>
 
 For each account and role that you want a user group to have access to, you'll have to add that to a new or existing group. Resources to help you understand group access: 
